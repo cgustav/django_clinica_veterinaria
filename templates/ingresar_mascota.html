@@ -1,0 +1,86 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<!-- crear_mascota.html -->
+
+<div class="d-flex align-items-center justify-content-center">
+
+    <form class="container w-50" method="POST" action="{% url 'ingresar_mascota' %}">
+        <h3 class="text-secondary py-4">Ingresar nueva Mascota</h2>
+
+        {% csrf_token %}
+
+        <div class="form-group">
+            <label for="nombre">Nombre:</label>
+            <input type="text" id="nombre" name="nombre" class="form-control" maxlength="100" required>
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <label for="sexo">Sexo:</label>
+            <select id="sexo" name="sexo" class="form-control" required>
+            <option value="Macho">Macho</option>
+            <option value="Hembra">Hembra</option>
+            </select>
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <label for="edad">Edad:</label>
+            <input type="number" min="0" max="99" step="1" id="edad" name="edad" class="form-control" required>
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <label for="numero_chip">Número de chip:</label>
+            <input type="text" id="numero_chip" name="numero_chip" class="form-control" maxlength="20" required>
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <label for="especie">Especie:</label>
+            <!-- <input type="text" id="especie" name="especie" class="form-control" required> -->
+            <select id="especie" name="especie" class="form-control" required>
+                {% for especie in especies %}
+                <option value="{{ especie }}">{{ especie }}</option>
+                {% endfor %}
+            </select>
+        </div>
+
+        <br>
+
+        <div class="form-group">
+            <label for="raza">Raza:</label>
+            <input type="text" id="raza" name="raza" class="form-control" maxlength="100" required>
+        </div>
+        <br>
+        <div class="form-group">
+            <label for="propietario">Propietario:</label>
+            <select id="propietario" name="propietario" class="form-control" required>
+            {% for propietario in propietarios %}
+            <option value="{{ propietario.id }}">{{ propietario.nombres }} {{ propietario.apellidos }}</option>
+            {% endfor %}
+            </select>
+        </div> 
+        <br>
+        <div class="form-group">
+            <label for="veterinario">Veterinario a cargo:</label>
+            <select id="veterinario" name="veterinario" class="form-control" required>
+            {% for veterinario in veterinarios %}
+            <option value="{{ veterinario.id }}">{{ veterinario.nombre_completo }}</option>
+            {% endfor %}
+            </select>
+        </div>
+        <br>
+        <div class="form-group">
+            <input type="submit" value="Guardar" class="btn btn-primary">
+        </div>
+    </form>
+</div>
+
+{% endblock %}

@@ -1,0 +1,48 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+
+
+<!-- <h2 class="text-secondary pt-3 pl-4">¿Desea iniciar nueva atención?</h2>
+
+<div class="px-4 my-4">
+    <a href="/ingresar_atencion.html" class="btn btn-outline-primary btn-lg btn-block">Crear atención</a>
+</div> -->
+
+<h2 class="text-secondary pt-3 pl-4">Últimas atenciones</h2>
+
+<div class="table-responsive px-4 mt-4">
+    <table class="table pt-4">
+        <thead class="">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre Mascota</th>
+            <th scope="col">Nombre Veterinario</th>
+            <th scope="col">Nombre Propietario</th>
+            <th scope="col">Fecha</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% if atenciones|length > 0 %}
+          {% for atencion in atenciones %}
+            <tr>
+              <th scope="row">{{atencion.id}}</th>
+              <td>{{ atencion.ficha.mascota.nombre }}</td>
+              <td>{{ atencion.veterinario.nombre_completo }}</td>
+              <td>{{ atencion.ficha.mascota.propietario.nombres }} {{atencion.ficha.mascota.propietario.apellidos}}</td>
+              <td>{{ atencion.fecha_creacion }}</td>
+              <!-- <td><button type="button" class="btn btn-info btn-sm">Ver detalle</button></td> -->
+              <td><a class="btn btn-info btn-sm" href="{% url 'ficha_atencion' atencion.id %}">Ver detalle</a></td>
+
+            </tr>
+          {% endfor %}
+        {% else %}
+          <!-- <tr>No hay mascotas.</tr> -->
+        {% endif %}
+        </tbody>
+      </table>
+</div>
+
+
+{% endblock %}

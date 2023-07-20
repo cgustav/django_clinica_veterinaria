@@ -1,0 +1,68 @@
+
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<!-- ficha_atencion.html -->
+<div class="container">
+    <div class="card">
+      <div class="card-header">
+        <h3>Ficha de Mascota</h3>
+      </div>
+      <div class="card-body">
+        <div class="row">
+          <div class="col-md-6">
+            <!-- <h4 class="mb-4">Mascota</h5> -->
+            <p><strong>Nombre:</strong> {{ mascota.nombre }}</p>
+            <p><strong>Sexo:</strong> {{ mascota.sexo }}</p>
+            <p><strong>Especie:</strong> {{ mascota.especie }}</p>
+            <p><strong>Edad:</strong> {{ mascota.edad }}</p>
+          </div>
+          <div class="col-md-6">
+            <p><strong>Número de chip:</strong> {{ mascota.numero_chip }}</p>
+            <p><strong>Raza:</strong> {{ mascota.raza }}</p>
+            <p><strong>Propietario:</strong> {{ mascota.propietario.nombres }} {{ mascota.propietario.apellidos }}</p>
+            <p><strong>Veterinario de cabecera:</strong> {{ ficha.veterinario.nombre_completo }}</p>
+            <p><strong>Fecha de ingreso:</strong> {{ ficha.fecha_creacion }}</p>
+          </div>
+          <!-- <div class="col-md-6">
+            <h4 class="mb-4">Consulta</h5>
+            <p><strong>Diagnóstico:</strong> {{ atencion.diagnostico }}</p>
+            <p><strong>Tratamiento:</strong> {{ atencion.tratamiento }}</p>
+            <p><strong>Observaciones:</strong> {{ atencion.observaciones }}</p>
+            <p><strong>Fecha:</strong> {{ atencion.fecha_creacion }}</p>
+            <p><strong>Veterinario:</strong> {{ atencion.veterinario.nombre_completo }}</p>
+            <p><strong>Requiere seguimiento:</strong> {% if atencion.seguimiento %}Sí{% else %}No{% endif %}</p>
+          </div> -->
+        </div>
+      </div>
+
+      <div class="card-footer">
+        <h3>Historial clínico</h3>
+        {% if atenciones|length > 0 %}
+            {% for atencion in atenciones %}
+                <div class="card">
+                    <!-- <div class="card-header">
+                    </div> -->
+                    <div class="card-body">
+                        <div class="row">
+                        <div class="col-md-6">
+                            <h4 class="mb-4">{{ atencion.fecha_creacion }}</h5>
+                            <!-- <p><strong>Fecha:</strong> {{ atencion.fecha_creacion }}</p> -->
+                            <p><strong>Diagnóstico:</strong> {{ atencion.diagnostico }}</p>
+                            <p><strong>Tratamiento:</strong> {{ atencion.tratamiento }}</p>
+                            <p><strong>Observaciones:</strong> {{ atencion.observaciones }}</p>
+                            <p><strong>Veterinario:</strong> {{ atencion.veterinario.nombre_completo }}</p>
+                            <p><strong>Requiere seguimiento:</strong> {% if atencion.seguimiento %}Sí{% else %}No{% endif %}</p>
+                        </div>
+                        </div>
+                </div>
+            {% endfor %}
+        {% else %}
+            <!-- <tr>No hay mascotas.</tr> -->
+        {% endif %}
+      </div>
+    </div>
+</div>
+  
+{% endblock %}

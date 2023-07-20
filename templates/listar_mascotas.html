@@ -1,0 +1,56 @@
+<!-- listar_mascotas.html -->
+{% extends 'layout.html' %}
+
+{% block content %}
+
+<h2 class="text-secondary pt-3 pl-4">Listado de Mascotas</h2>
+
+<div class="pl-4 py-3">
+    <a href="/ingresar_mascota.html" class="btn btn-success py-2"> Ingresar mascota </a>
+</div>
+
+<div class="table-responsive px-4 mt-4">
+    <table class="table table-striped pt-4">
+        <thead class="">
+          <tr>
+            <th scope="col">ID</th>
+            <th scope="col">Nombre</th>
+            <th scope="col">Sexo</th>
+            <th scope="col">Especie</th>
+            <th scope="col">Edad</th>
+            <th scope="col">Número de Chip</th>
+            <th scope="col">Raza</th>
+            <th scope="col">Propietario</th>
+            <th scope="col">Acción</th>
+          </tr>
+        </thead>
+        <tbody>
+        {% if mascotas|length > 0 %}
+          {% for mascota in mascotas %}
+            <tr>
+              <th scope="row">{{mascota.id}}</th>
+              <td>{{ mascota.nombre }}</td>
+              <td>{{ mascota.sexo }}</td>
+              <td>{{ mascota.especie }}</td>
+              <td>{{ mascota.edad }}</td>
+              <td>{{ mascota.numero_chip }}</td>
+              <td>{{ mascota.raza }}</td>
+              <td>{{ mascota.propietario.nombres }} {{ mascota.propietario.apellidos }}</td>
+              <!-- <td><button type="button" class="btn btn-info btn-sm">Ver ficha</button> <button type="button" class="btn btn-danger btn-sm">Desactivar</button></td> -->
+              <!-- <td><button type="button" class="btn btn-info btn-sm">Ver ficha</button></td> -->
+              <td>
+                <a class="btn btn-outline-info btn-sm" href="{% url 'ficha_mascota' mascota.id %}">Ver ficha</a> 
+                <a class="btn btn-outline-success btn-sm" href="{% url 'ingresar_atencion' mascota.id %}">Nueva atención</a>
+              </td>
+
+            </tr>
+          {% endfor %}
+        {% else %}
+          <!-- <tr>No hay mascotas.</tr> -->
+        {% endif %}
+        </tbody>
+      </table>
+</div>
+
+  {% endblock %}
+  
